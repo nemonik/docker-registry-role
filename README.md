@@ -14,7 +14,7 @@ Requires Kubernetes and MetalLB installed.
 |-------------------------|----------|-----------------------|---------------------|--------------------------------------------------|
 | http_proxy              | no       | not defined           | http proxy setting  | patches registry image for http_proxy            |
 | https_proxy             | no       | not defined           | https proxy setting | patches registry image for https_proxy           |
-| no_proxy                | no       | not defined           | no_proxy setting    | patches registrt image for no_proxy              |
+| no_proxy                | no       | not defined           | no_proxy setting    | patches registry image for no_proxy              |
 | docker_timeout          | yes      | 300                   | Integer value       | number of seconds before docker pull timeout     |
 | docker_retries          | yes      | 60                    | Integer value       | number of tries for docker pull                  |
 | docker_delay            | yes      | 10                    | Integer value       | delay in seconds between pull retries            |
