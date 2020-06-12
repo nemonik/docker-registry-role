@@ -1,0 +1,11 @@
+---
+# defaults file for docker-registry
+docker_timeout: 300
+docker_retries: 60
+docker_delay: 10
+default_retries: 60
+default_delay: 10
+registry_version: 2.7.1
+registry_host: 192.168.0.201
+registry_port: 5000
+images_cache_path: /vagrant/cache/images
