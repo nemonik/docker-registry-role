@@ -27,7 +27,7 @@ Requires Kubernetes and MetalLB installed.
 
 ## Example Playbook
 
-An example can be found used in my Hands-on DevOps course's [master-playbook.yml](https://github.com/nemonik/hands-on-DevOps/blob/master/ansible/master-playbook.yml) and my ([metallb-role](https://github.com/nemonik/metallb-role)).
+An example can be found used in my Hands-on DevOps course's [master-playbook.yml](https://github.com/nemonik/hands-on-DevOps/blob/master/ansible/master-playbook.yml).
 
 ```
 - hosts: masters
@@ -37,6 +37,8 @@ An example can be found used in my Hands-on DevOps course's [master-playbook.yml
     - metallb
     - docker-registry
 ```
+
+The above Ansible playbook uses my ([K3s-server-role](https://github.com/nemonik/k3s-server-role)) to install Lightweight Kubernetes (K3s) and my ([metallb-role](https://github.com/nemonik/metallb-role)).
 
 For more information and to see this role put into action checkout my [Hands-on DevOps class](https://github.com/nemonik/hands-on-DevOps) project.
 
