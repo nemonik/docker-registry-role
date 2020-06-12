@@ -38,7 +38,7 @@ An example can be found used in my Hands-on DevOps course's [master-playbook.yml
     - docker-registry
 ```
 
-The above Ansible playbook uses my ([K3s-server-role](https://github.com/nemonik/k3s-server-role)) to install Lightweight Kubernetes (K3s) and my ([metallb-role](https://github.com/nemonik/metallb-role)).
+The above Ansible playbook uses my ([K3s-server role](https://github.com/nemonik/k3s-server-role)) to install Lightweight Kubernetes (K3s) and my ([metallb role](https://github.com/nemonik/metallb-role)) to install MetalLB.
 
 For more information and to see this role put into action checkout my [Hands-on DevOps class](https://github.com/nemonik/hands-on-DevOps) project.
 
