@@ -1,3 +1,4 @@
+:...skipping...
 # Copyright (C) 2020 Michael Joseph Walsh - All Rights Reserved
 # You may use, distribute and modify this code under the
 # terms of the the license.
@@ -12,6 +13,7 @@ kind: Namespace
 metadata:
   name: registry
 
+{% registry == 'yes' %}
 ---
 
 apiVersion: v1
@@ -30,7 +32,7 @@ spec:
 ---
 
 apiVersion: apps/v1
-kind: Deployment  
+kind: Deployment
 metadata:
   name: registry
   namespace: registry
@@ -110,3 +112,105 @@ spec:
     app: registry
   type: LoadBalancer
   loadBalancerIP: {{ registry_host }}
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: passthrough-registry-local-path-pvc
+  namespace: registry
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  resources:
+    requests:
+      storage: 2Gi
+{% endif %}
+{% passthrough_registry == 'yes' %}
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: passthrough-registry
+  namespace: registry
+  labels:
+    app: passthrough-registry
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: passthrough-registry
+  template:
+    metadata:
+      labels:
+        app: passthrough-registry
+    spec:
+      containers:
+      - name: registry
+        image: nemonik/registry:{{ registry_version }}
+        imagePullPolicy: IfNotPresent
+        env:
+{% if http_proxy %}
+        - name: http_proxy
+          value: {{ http_proxy }}
+        - name: HTTP_PROXY
+          value: {{ http_proxy }}
+{% endif %}
+{% if https_proxy %}
+        - name: https_proxy
+          value: {{ https_proxy }}
+        - name: HTTPS_PROXY
+          value: {{ https_proxy }}
+{% endif %}
+{% if no_proxy %}
+        - name: no_proxy
+          value: {{ no_proxy }}
+        - name: NO_PROXY
+          value: {{ no_proxy }}
+{% endif %}
+        ports:
+        - name: http
+          containerPort: 5000
+        volumeMounts:
+        - mountPath: /var/lib/registry
+          name: data
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 5000
+          initialDelaySeconds: 180
+          timeoutSeconds: 5
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 5000
+          initialDelaySeconds: 5
+          timeoutSeconds: 1
+          failureThreshold: 12
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: passthrough-registry-local-path-pvc
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: passthrough-registry
+  namespace: registry
+spec:
+  ports:
+    - name: http
+      targetPort: http
+      port: {{ passthrough_registry_port }}
+  selector:
+    app: registry
+  type: LoadBalancer
+  loadBalancerIP: {{ passthrough_registry_host }}
+{% endif %}
