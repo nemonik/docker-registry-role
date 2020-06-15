@@ -40,7 +40,7 @@ services:
 {% if passthrough_registry == 'yes' %}
   pass_through_registry:
     image:
-        nemonik/registry:{{ registry_version }}
+        nemonik/passthrough-registry:{{ registry_version }}
 {% if (http_proxy or https_proxy or no_proxy) %}
     environment:
 {% endif %}

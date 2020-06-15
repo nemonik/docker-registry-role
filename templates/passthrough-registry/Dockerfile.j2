@@ -7,6 +7,6 @@ RUN apk update && apk add --update openssl ca-certificates wget
 RUN cd /usr/local/share/ca-certificates/ && {% for ca in CA_CERTIFICATES %} wget {{ ca }} &&{% endfor %} update-ca-certificates
 {% endif %}
 
-COPY config.yml /etc/docker/registry/config.yml
+COPY passthrough-registry/config.yml /etc/docker/registry/config.yml
  
 CMD ["serve", "/etc/docker/registry/config.yml"]

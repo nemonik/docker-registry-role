@@ -150,7 +150,7 @@ spec:
     spec:
       containers:
       - name: registry
-        image: nemonik/registry:{{ registry_version }}
+        image: nemonik/passthrough-registry:{{ registry_version }}
         imagePullPolicy: IfNotPresent
         env:
 {% if http_proxy %}
