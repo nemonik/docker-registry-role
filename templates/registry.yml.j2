@@ -13,7 +13,7 @@ kind: Namespace
 metadata:
   name: registry
 
-{% registry == 'yes' %}
+{% if registry == 'yes' %}
 ---
 
 apiVersion: v1
@@ -128,7 +128,7 @@ spec:
     requests:
       storage: 2Gi
 {% endif %}
-{% passthrough_registry == 'yes' %}
+{% if passthrough_registry == 'yes' %}
 
 ---
 
