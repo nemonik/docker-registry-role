@@ -90,7 +90,7 @@
   tags:
     - docker-registry 
 
-- name: spin up container registry via Kubernetes
+- name: spin up container registry via Kubernetes, when registry_deploy_via is equal `kubernetes`
   block:
   - name: template kubernetes resource files into /home/{{ ansible_user_id }}/docker-registry
     template:
@@ -109,34 +109,11 @@
     register: retry_result
     until: retry_result is succeeded
   when: 
-    - deploy_via == 'yes'
+    - registry_deploy_via == 'kubernetes'
   tags:
     - docker-registry
 
-- name: spin up container registry via Kubernetes, when deploy_via is equal `kubernetes`
-  block:
-  - name: template kubernetes resource files into /home/{{ ansible_user_id }}/docker-registry
-    template:
-      src: templates/registry.yml.j2
-      dest: /home/{{ ansible_user_id }}/docker-registry/registry.yml
-
-  - name: spin up via kubectl
-    shell: kubectl --kubeconfig=/home/{{ ansible_user_id }}/kubeconfig.yml apply -f registry.yml
-    args:
-      chdir: /home/{{ ansible_user_id }}/docker-registry
-
-  - name: wait for registry to spin up
-    shell: kubectl --kubeconfig=/home/{{ ansible_user_id }}/kubeconfig.yml -n registry get pod | grep Running
-    retries: "{{ default_retries }}"
-    delay: "{{ default_delay }}"
-    register: retry_result
-    until: retry_result is succeeded
-  when:
-    - deploy_via == 'yes'
-  tags:
-    - docker-registry
-
-- name: spin up Docker Registry via docker-compose, when deploy_via is equal `docker-compose`
+- name: spin up Docker Registry via docker-compose, when registry_deploy_via is equal `docker-compose`
   block:
   - name: "template docker-compose.yml into /home/{{ ansible_user_id }}/docker-registry"
     template:
@@ -149,7 +126,7 @@
       debug: yes
       project_src: "/home/{{ ansible_user_id }}/docker-registry"
   when: 
-    - deploy_via == "docker-compose"
+    - registry_deploy_via == "docker-compose"
   tags:
     - docker-registry
 

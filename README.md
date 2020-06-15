@@ -4,17 +4,17 @@
 
 An Ansible role for ensuring the configuration of a docker regsitry.  
 
-If `deployed_via` is set to `kubernetes` (The default.):
+If `registry_deploy_via` is set to `kubernetes` (The default.):
 - If `registry` is set to `yes` (The default.), a private registry is spun up on `registry_port` (`5000` is the default.) on a private IP (`192.168.0.201` is the default.)
 - If `passthrough_regsitry` is set to `yes` (The default is `no`.), a passthrough registry is spun up on on `passthrough_registry_port` (`5000` is the default.) of a private IP (`192.168.0.202` is the default.)
 
-If `deployed_via` is set to `docker-compose`:
+If `registry_deploy_via` is set to `docker-compose`:
 - If `registry` is set to `yes` (The default.), a private registry is spun up on `registry_port` (`5000` is the default.) of the host
 - If `passthrough_regsitry` is set to `yes` (The default is `no`.), a passthrough registry is spun up on on `passthrough_registry_port` (`5001` is the default.) of the host
 
 ## Requirements
 
-Requires Kubernetes and MetalLB installed, when `deployed_via` is set to `kubernetes`.  Otherwise, requires docker-compose.
+Requires Kubernetes and MetalLB installed, when `registry_deploy_via` is set to `kubernetes`.  Otherwise, requires docker-compose.
 
 ## Role Variables
 
@@ -35,7 +35,7 @@ Requires Kubernetes and MetalLB installed, when `deployed_via` is set to `kubern
 | passthrough_registry      | no       | yes                   | yes or no                    | Also, create a passthrough registry                                                        |
 | passthrough_registry_host | no       | 192.168.0.202         | Private IP address           | Use this ip if deployed via Kubernetes otherwise use the IP of the host                    |
 | passthrough_registry_port | no       | 5000 or 5001          | Integer value                | Port for passthrough registry. 5001, if via docker-compose. Otherwise 5000, if Kuberenetes |
-| deploy_via                | no       | kubernetes            | kubernetes or docker-compose | how to spin up                                                                             |
+| registry_deploy_via       | no       | kubernetes            | kubernetes or docker-compose | how to spin up                                                                             |
 | images_cache_path         | no       | /vagrant/cache/images | Path                         | Path to folder used to cache saved Docker images                                           |
 
 ## Example Playbook
