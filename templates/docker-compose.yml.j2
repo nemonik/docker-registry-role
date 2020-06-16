@@ -7,10 +7,19 @@ version: "2"
 # You should have received a copy of the license with
 # this file. If not, please email <mjwalsh@nemonik.com>
 
+
+version: "2"
+
+# Copyright (C) 2020 Michael Joseph Walsh - All Rights Reserved
+# You may use, distribute and modify this code under the
+# terms of the the license.
+#
+# You should have received a copy of the license with
+# this file. If not, please email <mjwalsh@nemonik.com>
+
 services:
 {% if registry == 'yes' %}
   private_registry:
-    build: registry/.
     image:
         nemonik/registry:{{ registry_version }}
     restart: always
@@ -28,20 +37,17 @@ services:
 {% if no_proxy %}
         - no_proxy={{ no_proxy }}
         - NO_PROXY={{ no_proxy }}
-{% endif %}  
+{% endif %}
     volumes:
         - ./volumes/registry:/var/lib/registry
     ports:
         - "{{ registry_port }}:5000"
-    image:
-        nemonik/registry:{{ registry_version }}
-{% endif %}
-    restart: always
+{% end %}
 {% if passthrough_registry == 'yes' %}
-  pass_through_registry:
-    build: passthrough-registry/.
+  passthrough_registry:
     image:
         nemonik/passthrough-registry:{{ registry_version }}
+    restart: always
 {% if (http_proxy or https_proxy or no_proxy) %}
     environment:
 {% endif %}
@@ -61,4 +67,4 @@ services:
         - ./volumes/passthrough-registry:/var/lib/registry
     ports:
         - "{{ passthrough_registry_port }}:5000"
-{% endif %}
+{% end %}
