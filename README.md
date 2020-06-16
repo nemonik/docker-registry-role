@@ -36,7 +36,7 @@ Requires Kubernetes and MetalLB installed, when `registry_deploy_via` is set to 
 | passthrough_registry_host | no       | 192.168.0.201         | Private IP address           | Use this ip if deployed via Kubernetes otherwise use the IP of the host                    |
 | passthrough_registry_port | no       | 5000 or 5001          | Integer value                | Port for passthrough registry. 5001, if via docker-compose. Otherwise 5000, if Kuberenetes |
 | registry_deploy_via       | no       | kubernetes            | kubernetes or docker-compose | how to spin up                                                                             |
-| images_cache_path         | no       | /vagrant/cache/images | Path                         | Path to folder used to cache saved Docker images                                           |
+| images_cache_path         | no       | not defined           | Path                         | Path to folder used to cache saved Docker images                                           |
 
 ## Example Playbook
 

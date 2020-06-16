@@ -13,4 +13,3 @@ passthrough_registry: yes
 passthrough_registry_host: 192.168.0.201
 passthrough_registry_port: 5000
 registry_deploy_via: kubernetes
-images_cache_path: /vagrant/cache/images
