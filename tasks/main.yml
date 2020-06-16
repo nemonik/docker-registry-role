@@ -41,7 +41,7 @@
     - "registry/Dockerfile"
     - "passthrough-registry/Dockerfile"
     - "registry_dockerfile_build.sh"
-    - "passthrough_dockerfile_build.sh"
+    - "passthrough_registry_dockerfile_build.sh.j2"
   tags:
     - docker-registry 
 
