@@ -7,16 +7,6 @@ version: "2"
 # You should have received a copy of the license with
 # this file. If not, please email <mjwalsh@nemonik.com>
 
-
-version: "2"
-
-# Copyright (C) 2020 Michael Joseph Walsh - All Rights Reserved
-# You may use, distribute and modify this code under the
-# terms of the the license.
-#
-# You should have received a copy of the license with
-# this file. If not, please email <mjwalsh@nemonik.com>
-
 services:
 {% if registry == 'yes' %}
   private_registry:
@@ -42,7 +32,7 @@ services:
         - ./volumes/registry:/var/lib/registry
     ports:
         - "{{ registry_port }}:5000"
-{% end %}
+{% endif %}
 {% if passthrough_registry == 'yes' %}
   passthrough_registry:
     image:
@@ -67,4 +57,4 @@ services:
         - ./volumes/passthrough-registry:/var/lib/registry
     ports:
         - "{{ passthrough_registry_port }}:5000"
-{% end %}
+{% endif %}
