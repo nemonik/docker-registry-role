@@ -10,7 +10,7 @@ version: "2"
 services:
 {% if registry == 'yes' %}
   private_registry:
-    build: .
+    build: registry/.
     image:
         nemonik/registry:{{ registry_version }}
     restart: always
@@ -39,6 +39,7 @@ services:
 {% endif %}
 {% if passthrough_registry == 'yes' %}
   pass_through_registry:
+    build: passthrough-registry/.
     image:
         nemonik/passthrough-registry:{{ registry_version }}
 {% if (http_proxy or https_proxy or no_proxy) %}
