@@ -111,7 +111,9 @@ spec:
     app: registry
   type: LoadBalancer
   loadBalancerIP: {{ registry_host }}
+{% endif %}
 
+{% if passthrough_registry == 'yes' %}
 ---
 
 apiVersion: v1
@@ -126,8 +128,6 @@ spec:
   resources:
     requests:
       storage: 2Gi
-{% endif %}
-{% if passthrough_registry == 'yes' %}
 
 ---
 
@@ -209,7 +209,7 @@ spec:
       targetPort: http
       port: {{ passthrough_registry_port }}
   selector:
-    app: registry
+    app: passthrough-registry
   type: LoadBalancer
   loadBalancerIP: {{ passthrough_registry_host }}
 {% endif %}
