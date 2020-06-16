@@ -35,8 +35,8 @@ services:
         - "{{ registry_port }}:5000"
     image:
         nemonik/registry:{{ registry_version }}
-    restart: always
 {% endif %}
+    restart: always
 {% if passthrough_registry == 'yes' %}
   pass_through_registry:
     build: passthrough-registry/.
@@ -58,7 +58,7 @@ services:
         - NO_PROXY={{ no_proxy }}
 {% endif %}
     volumes:
-        - ./volumes/pass-through-registry:/var/lib/registry
+        - ./volumes/passthrough-registry:/var/lib/registry
     ports:
         - "{{ passthrough_registry_port }}:5000"
 {% endif %}
