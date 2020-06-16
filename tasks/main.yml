@@ -118,7 +118,7 @@
       chdir: /home/{{ ansible_user_id }}/docker-registry
 
   - name: wait for registry to spin up
-    shell: count=`kubectl --kubeconfig=/home/vagrant/kubeconfig.yml -n registry get pod | grep Running | wc -l`;if [ $count -eq 2 ]; then exit 1; fi
+    shell: count=`kubectl --kubeconfig=/home/vagrant/kubeconfig.yml -n registry get pod | grep Running | wc -l`;if [ $count -eq 2 ]; then exit 0; else exit 1; fi
     retries: "{{ default_retries }}"
     delay: "{{ default_delay }}"
     register: retry_result
