@@ -20,9 +20,6 @@ Requires Kubernetes and MetalLB installed, when `registry_deploy_via` is set to 
 
 | Variable                  | Required | Default               | Choices                      | Comments                                                                                   |
 |---------------------------|----------|-----------------------|------------------------------|--------------------------------------------------------------------------------------------|
-| http_proxy                | no       | not defined           | http proxy setting           | Patches registry image for http_proxy                                                      |
-| https_proxy               | no       | not defined           | https proxy setting          | Patches registry image for https_proxy                                                     |
-| no_proxy                  | no       | not defined           | no_proxy setting             | Patches registry image for no_proxy                                                        |
 | docker_timeout            | yes      | 300                   | Integer value                | Number of seconds before docker pull timeout                                               |
 | docker_retries            | yes      | 60                    | Integer value                | Number of tries for docker pull                                                            |
 | docker_delay              | yes      | 10                    | Integer value                | Delay in seconds between pull retries                                                      |
