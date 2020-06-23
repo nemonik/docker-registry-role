@@ -18,22 +18,22 @@ Requires Kubernetes and MetalLB installed, when `registry_deploy_via` is set to 
 
 ## Role Variables
 
-| Variable                  | Required | Default               | Choices                      | Comments                                                                                   |
-|---------------------------|----------|-----------------------|------------------------------|--------------------------------------------------------------------------------------------|
-| docker_timeout            | yes      | 300                   | Integer value                | Number of seconds before docker pull timeout                                               |
-| docker_retries            | yes      | 60                    | Integer value                | Number of tries for docker pull                                                            |
-| docker_delay              | yes      | 10                    | Integer value                | Delay in seconds between pull retries                                                      |
-| default_retries           | yes      | 60                    | Integer value                | Default number of retries                                                                  |
-| default_delay             | yes      | 60                    | Integer value                | Default delay in seconds between retries                                                   |
-| registry_version          | yes      | 2.7.1                 | matches tag                  | Docker registry version                                                                    |
-| registry                  | no       | yes                   | yes or no                    | spin up a private regsitry                                                                 |
-| registry_host             | yes      | 192.168.0.200         | Private IP address           | IP address of the registry, if deployed via Kubernetes                                     |
-| registry_port             | yes      | 5000                  | Integer                      | Port for the registry                                                                      |
-| passthrough_registry      | no       | yes                   | yes or no                    | Also, create a passthrough registry                                                        |
-| passthrough_registry_host | no       | 192.168.0.201         | Private IP address           | Use this ip if deployed via Kubernetes otherwise use the IP of the host                    |
-| passthrough_registry_port | no       | 5000 or 5001          | Integer value                | Port for passthrough registry. 5001, if via docker-compose. Otherwise 5000, if Kuberenetes |
-| registry_deploy_via       | no       | kubernetes            | kubernetes or docker-compose | how to spin up                                                                             |
-| images_cache_path         | no       | not defined           | Path                         | Path to folder used to cache saved Docker images                                           |
+| Variable                  | Required | Default      | Choices                      | Comments                                                                                   |
+|---------------------------|----------|--------------|------------------------------|--------------------------------------------------------------------------------------------|
+| docker_timeout            | yes      | 300          | Integer value                | Number of seconds before docker pull timeout                                               |
+| docker_retries            | yes      | 60           | Integer value                | Number of tries for docker pull                                                            |
+| docker_delay              | yes      | 10           | Integer value                | Delay in seconds between pull retries                                                      |
+| default_retries           | yes      | 60           | Integer value                | Default number of retries                                                                  |
+| default_delay             | yes      | 60           | Integer value                | Default delay in seconds between retries                                                   |
+| registry_version          | yes      | 2.7.1        | matches tag                  | Docker registry version                                                                    |
+| registry                  | no       | yes          | yes or no                    | spin up a private regsitry                                                                 |
+| registry_host             | yes      | not defined  | IP address                   | IP address if deployed via Kubernetes otherwise use the IP of the host                     |
+| registry_port             | yes      | 5000         | Integer                      | Port for the registry                                                                      |
+| passthrough_registry      | no       | yes          | yes or no                    | Also, create a passthrough registry                                                        |
+| passthrough_registry_host | no       | not defined  | IP address                   | IP address if deployed via Kubernetes otherwise use the IP of the host                     |
+| passthrough_registry_port | no       | 5000 or 5001 | Integer value                | Port for passthrough registry. 5001, if via docker-compose. Otherwise 5000, if Kuberenetes |
+| registry_deploy_via       | no       | kubernetes   | kubernetes or docker-compose | How to spin up                                                                             |
+| images_cache_path         | no       | not defined  | Path                         | Path to folder used to cache saved Docker images                                           |
 
 ## Example Playbook
 
