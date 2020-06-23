@@ -14,7 +14,7 @@ If `registry_deploy_via` is set to `docker-compose`:
 
 ## Requirements
 
-Requires Kubernetes and MetalLB installed, when `registry_deploy_via` is set to `kubernetes`.  Otherwise, requires docker-compose.
+Requires Kubernetes and MetalLB installed, when `registry_deploy_via` is set to `kubernetes`.  Otherwise, requires Docker and Docker Compose, when `registry_deploy_via` is set to `docker-compose`..
 
 ## Role Variables
 
@@ -43,12 +43,18 @@ An example can be found used in my Hands-on DevOps course's [ansible/master-play
 - hosts: masters
   remote_user: vagrant
   roles:
+    - common
+    - docker
+    - docker-compose
     - docker-registry
-    - k3s-server
-    - metallb
 ```
 
-The above Ansible playbook spins up the Docker Regsitry prior to using my [K3s-server role](https://github.com/nemonik/k3s-server-role) to install Lightweight Kubernetes (K3s) and my [metallb role](https://github.com/nemonik/metallb-role) to install MetalLB.
+The above Ansible playbook uses my
+
+- [Common role](https://github.com/nemonik/common-role) to configure the instance past the base CentOS 7, Alpine 3.10 or Ubuntu Bionic image
+- [Docker role](https://github.com/nemonik/docker-role) to install and configure Docker
+- [Docker-compose role](https://github.com/nemonik/docker-compose-role) to install Docker-compose
+- [Docker Registry role](https://github.com/nemonik/docker-registry-role) to install a private Docker registry
 
 For more information and to see this role put into action checkout my [Hands-on DevOps class](https://github.com/nemonik/hands-on-DevOps) project.
 
