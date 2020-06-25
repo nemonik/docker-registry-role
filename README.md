@@ -1,4 +1,4 @@
-# docker-registry Ansible role
+# Docker Registry Ansible role
 
 ![Basic role syntax check](https://github.com/nemonik/docker-registry-role/workflows/Basic%20role%20syntax%20check/badge.svg)
 
