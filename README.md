@@ -2,7 +2,7 @@
 
 ![Basic role syntax check](https://github.com/nemonik/docker-registry-role/workflows/Basic%20role%20syntax%20check/badge.svg)
 
-An Ansible role for ensuring the configuration of a docker regsitry.  
+An Ansible role for ensuring the configuration of a docker registry.  
 
 If `registry_deploy_via` is set to `kubernetes` (The default.):
 - If `registry` is set to `yes` (The default.), a private registry is spun up on `registry_port` (`5000` is the default.) on a private IP (`192.168.0.200` is the default.)
